@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رحلة العلوم</title>
+<style>
+:root{--navy:#101b35;--panel:#1b2b4b;--gold:#ffd76a;--mint:#72e2bd;--white:#f6f8ff}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#263e69,#10172b 70%);font-family:Tahoma,Arial,sans-serif;color:var(--white);min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:12px 18px;font-weight:bold}
+.app{max-width:1100px;margin:auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}.logo{font-size:42px;filter:drop-shadow(0 5px 10px #0006)}h1{margin:0;font-size:clamp(25px,4vw,40px)}.sub{color:#b8c8e8;margin-top:4px}
+.stats{display:flex;gap:9px;flex-wrap:wrap}.pill{background:#ffffff14;border:1px solid #ffffff20;border-radius:99px;padding:10px 14px}
+main{margin-top:18px}.screen{display:none}.screen.active{display:block}
+.hero{background:linear-gradient(120deg,#243d67,#1a2c4e);border:1px solid #ffffff24;border-radius:25px;padding:24px;display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center;box-shadow:0 18px 50px #0004}
+.hero h2{font-size:clamp(25px,4vw,38px);margin:0 0 10px}.hero p{color:#d2def4;line-height:1.9;margin:0 0 18px}.hero-art{font-size:clamp(100px,18vw,170px);text-align:center;filter:drop-shadow(0 12px 10px #0005)}
+.primary{background:linear-gradient(120deg,#ffe18a,#ffb94f);color:#3b2a10;box-shadow:0 5px 0 #b9782d}.secondary{background:#ffffff17;color:white;border:1px solid #ffffff2b}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:24px 2px 12px}.section-title h3{margin:0;font-size:22px}
+.worlds{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.world{background:linear-gradient(145deg,#263d63,#192944);border:1px solid #ffffff20;border-radius:18px;padding:15px;text-align:right;color:white;min-height:150px;position:relative;overflow:hidden}
+.world .emoji{font-size:36px}.world strong{display:block;margin:8px 0 5px}.world small{color:#b9c9e7}.world.locked{opacity:.55;filter:saturate(.5)}.world:not(.locked):hover{transform:translateY(-3px);border-color:#ffe18a}
+.world .tag{position:absolute;left:12px;top:12px;font-size:11px;background:#ffffff18;padding:5px 8px;border-radius:30px}
+.game-layout{display:grid;grid-template-columns:1fr 300px;gap:14px}
+.scene{min-height:390px;border-radius:24px;overflow:hidden;position:relative;background:linear-gradient(#78c8ed 0 52%,#78b86c 52% 100%);border:3px solid #ffffff25;box-shadow:0 15px 40px #0005}
+.sun{position:absolute;top:28px;left:45px;width:68px;height:68px;border-radius:50%;background:#ffe68a;box-shadow:0 0 45px #ffe68a}
+.cloud{position:absolute;top:80px;font-size:52px;opacity:.8}.c1{right:10%}.c2{left:34%;top:130px}
+.hill{position:absolute;bottom:34%;width:65%;height:100px;border-radius:50% 50% 0 0;background:#5b9b62}.h1{left:-12%}.h2{right:-12%;background:#4e895b}
+.ground{position:absolute;bottom:0;height:36%;width:100%;background:repeating-linear-gradient(90deg,#4c8f50 0 50px,#579d57 50px 100px);border-top:8px solid #8acb72}
+.lab{position:absolute;bottom:35%;left:50%;transform:translateX(-50%);font-size:90px;filter:drop-shadow(0 8px 5px #0004)}
+.avatar{position:absolute;bottom:34%;right:15%;font-size:56px;transition:all .3s;filter:drop-shadow(0 5px 4px #0005)}
+.item-row{position:absolute;bottom:8%;left:0;right:0;display:flex;justify-content:space-evenly;align-items:center}
+.item{background:#ffffffdf;color:#182541;border:3px solid #fff;border-radius:18px;padding:12px 15px;font-size:36px;box-shadow:0 6px 0 #47764b;min-width:80px;text-align:center}
+.item small{display:block;font-size:12px;font-weight:bold}
+.side{background:#1b2b4b;border:1px solid #ffffff20;border-radius:22px;padding:18px}
+.side h3{margin:0 0 8px}.side p{color:#c5d3ec;line-height:1.8}.progress{height:10px;background:#ffffff20;border-radius:20px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:linear-gradient(90deg,#71e2bd,#ffe18a);width:0%;transition:width .3s}
+.task{background:#ffffff10;border-radius:14px;padding:12px;margin:10px 0;display:flex;gap:9px;align-items:center}
+.action{width:100%;margin-top:8px;background:#6dddb9;color:#102b31}
+.quiz{background:#1b2b4b;border:1px solid #ffffff22;border-radius:22px;padding:20px;margin-top:14px}
+.quiz h3{margin:0 0 8px}.quiz p{color:#c6d4ed}.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.answer{background:#31496f;color:white;border:1px solid #ffffff24;padding:15px}.answer:hover{background:#42618f}.answer.correct{background:#176c56}.answer.wrong{background:#8c3e4c}
+.notice{min-height:28px;color:var(--gold);font-weight:bold;margin-top:10px}
+footer{text-align:center;color:#8fa4c8;font-size:12px;margin:24px 0 10px}
+@media(max-width:800px){.worlds{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.hero-art{grid-row:1}.game-layout{grid-template-columns:1fr}.scene{min-height:340px}.answers{grid-template-columns:1fr}.stats{width:100%}}
+</style>
+</head>
+<body><div class="app">
+<header><div class="brand"><div class="logo">🧭</div><div><h1>رحلة العلوم</h1><div class="sub">مغامرة المعرفة تبدأ من هنا!</div></div></div><div class="stats"><div class="pill">⭐ النجوم: <b id="stars">0</b></div><div class="pill">🏅 العوالم: <b id="done">0</b>/8</div></div></header>
+<main>
+<section id="home" class="screen active">
+<div class="hero"><div><h2>أيها العالم الصغير، هل أنت مستعد؟</h2><p>انطلق في رحلة عبر عوالم العلوم الثمانية. اكتشف أسرار الطبيعة، حل الألغاز، واجمع بلورات المعرفة لتفتح بوابة العالم الأخير!</p><button class="primary" onclick="showMap()">ابدأ المغامرة 🚀</button></div><div class="hero-art">🔬🌍</div></div>
+<div class="section-title"><h3>مهمتك الكبرى</h3><span class="sub">8 عوالم • ألغاز • مكافآت</span></div>
+<div class="worlds" id="homeWorlds"></div>
+</section>
+<section id="map" class="screen"><div class="section-title"><h3>🗺️ خريطة العوالم</h3><button class="secondary" onclick="showHome()">الرئيسية</button></div><div class="worlds" id="mapWorlds"></div></section>
+<section id="level" class="screen">
+<div class="section-title"><h3 id="levelTitle">عالم المادة</h3><button class="secondary" onclick="showMap()">خريطة العوالم</button></div>
+<div class="game-layout"><div class="scene"><div class="sun"></div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="hill h1"></div><div class="hill h2"></div><div class="ground"></div><div class="lab" id="sceneIcon">🧪</div><div class="avatar">🧑‍🔬</div><div class="item-row" id="sceneItems"></div></div>
+<aside class="side"><h3 id="missionTitle">🎯 مهمة المختبر</h3><p id="missionDesc">افحص العناصر وصنّف كل عنصر في مجموعته الصحيحة.</p><div class="progress"><span id="progress"></span></div><b id="progressText">0 من 3 مهام</b><div class="task">💡 <span id="hint">اقترب من العنصر واختر الفئة الصحيحة.</span></div><button class="action" onclick="showMap()">العودة إلى الخريطة</button></aside></div>
+<div class="quiz" id="quiz"><h3 id="question">اختر العنصر لبدء التحدي</h3><p id="questionSub">كل إجابة صحيحة تمنحك 10 نجوم.</p><div class="answers" id="answers"></div><div class="notice" id="notice"></div></div>
+</section>
+</main><footer>رحلة العلوم © مغامرة تعليمية مستقلة تعمل في المتصفح</footer></div>
+<script>
+const worlds=[
+{n:"عالم المادة",e:"🧪",d:"صنّف السوائل والجمادات والنباتات",items:[["💧 الماء","السوائل"],["🪨 الصخرة","الجمادات"],["🌳 الشجرة","النباتات"]],icon:"🧪"},
+{n:"عالم الفضاء",e:"🚀",d:"اكتشف الكواكب وأسرار المجموعة الشمسية",items:[["☀️ الشمس","نجم"],["🪐 زحل","كوكب"],["🌙 القمر","تابع طبيعي"]],icon:"🚀"},
+{n:"عالم الكائنات الحية",e:"🌿",d:"ميّز الكائنات الحية عن غير الحية",items:[["🐦 العصفور","كائن حي"],["🌵 الصبار","كائن حي"],["🪑 الكرسي","غير حي"]],icon:"🌳"},
+{n:"عالم جسم الإنسان",e:"🫀",d:"تعرّف على أعضاء الجسم ووظائفها",items:[["❤️ القلب","يضخ الدم"],["🫁 الرئتان","التنفس"],["🧠 الدماغ","التحكم"]],icon:"🫀"},
+{n:"عالم الطاقة",e:"⚡",d:"اكتشف مصادر الطاقة وتحولاتها",items:[["☀️ الشمس","طاقة شمسية"],["💨 الرياح","طاقة رياح"],["🔋 البطارية","طاقة كيميائية"]],icon:"⚡"},
+{n:"عالم الماء",e:"💧",d:"رتّب مراحل دورة الماء في الطبيعة",items:[["☁️ التكاثف","تكوّن السحب"],["🌧️ الهطول","نزول المطر"],["☀️ التبخر","تحول الماء لبخار"]],icon:"💧"},
+{n:"عالم القوى والحركة",e:"🧲",d:"اكتشف الجاذبية والمغناطيس والحركة",items:[["🧲 المغناطيس","يجذب الحديد"],["🍎 التفاحة","تسقط بالجاذبية"],["🚲 الدراجة","حركة"]],icon:"🧲"},
+{n:"التحدي النهائي",e:"🏆",d:"اختبر معلوماتك وافتح بوابة المعرفة",items:[["🧪 المادة","العالم الأول"],["🚀 الفضاء","العالم الثاني"],["🌿 الحياة","العالم الثالث"]],icon:"🏆"}
+];
+let stars=0,completed=new Set(),current=0,index=0;
+function save(){document.getElementById('stars').textContent=stars;document.getElementById('done').textContent=completed.size}
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function showHome(){show('home')}function showMap(){renderWorlds('mapWorlds');show('map')}
+function renderWorlds(id){let el=document.getElementById(id);el.innerHTML='';worlds.forEach((w,i)=>{let locked=i>0&&!completed.has(i-1);let b=document.createElement('button');b.className='world'+(locked?' locked':'');b.innerHTML=`<span class="tag">${completed.has(i)?'مكتمل ✓':locked?'مقفل 🔒':'متاح'}</span><span class="emoji">${w.e}</span><strong>${i+1}. ${w.n}</strong><small>${w.d}</small>`;b.disabled=locked;b.onclick=()=>startLevel(i);el.appendChild(b)})}
+function startLevel(i){current=i;index=0;show('level');let w=worlds[i];document.getElementById('levelTitle').textContent=w.e+' '+w.n;document.getElementById('missionTitle').textContent='🎯 '+w.n;document.getElementById('missionDesc').textContent=w.d;document.getElementById('sceneIcon').textContent=w.icon;document.getElementById('hint').textContent='اختر العنصر الظاهر ثم أجب عن السؤال.';document.getElementById('notice').textContent='';renderItem()}
+function renderItem(){let w=worlds[current],row=document.getElementById('sceneItems');row.innerHTML='';w.items.forEach((it,i)=>{let b=document.createElement('button');b.className='item';b.innerHTML=it[0]+'<small>'+(i===index?'اخترني':'عنصر '+(i+1))+'</small>';b.onclick=()=>{index=i;ask()};row.appendChild(b)});document.getElementById('progress').style.width=(index/3*100)+'%';document.getElementById('progressText').textContent=index+' من 3 مهام';ask()}
+function ask(){let item=worlds[current].items[index];document.getElementById('question').textContent='ما المعلومة الصحيحة عن '+item[0]+'؟';document.getElementById('questionSub').textContent='اختر الإجابة المناسبة لإكمال المهمة.';let choices=[item[1],'إجابة غير صحيحة ١','إجابة غير صحيحة ٢'].sort(()=>Math.random()-.5);let box=document.getElementById('answers');box.innerHTML='';choices.forEach(c=>{let b=document.createElement('button');b.className='answer';b.textContent=c;b.onclick=()=>answer(c,item[1],b);box.appendChild(b)})}
+function answer(choice,correct,btn){let note=document.getElementById('notice');if(choice===correct){if(btn.dataset.done)return;btn.dataset.done='1';stars+=10;save();note.textContent='إجابة صحيحة! +10 نجوم ⭐';document.querySelectorAll('.answer').forEach(b=>b.disabled=true);document.getElementById('progress').style.width=((index+1)/3*100)+'%';document.getElementById('progressText').textContent=(index+1)+' من 3 مهام';setTimeout(()=>{if(index<2){index++;renderItem()}else{completed.add(current);stars+=20;save();note.textContent='رائع! أكملت '+worlds[current].n+' وحصلت على 20 نجمة إضافية! 🏆';document.getElementById('question').textContent='🎉 أحسنت! أكملت العالم';document.getElementById('questionSub').textContent='افتح الخريطة لمتابعة مغامرتك.';document.getElementById('answers').innerHTML='<button class="answer" onclick="showMap()">متابعة إلى العوالم 🗺️</button>';renderWorlds('mapWorlds')}},650)}else{btn.classList.add('wrong');note.textContent='ليست الإجابة الصحيحة، حاول مرة أخرى 💡'}}
+renderWorlds('homeWorlds');save();
+</script></body></html>
